@@ -1,4 +1,4 @@
-# Unofficial gtk-pipe-viewer docker image
+# Unofficial pipe-viewer docker image
 
 Credit to: https://github.com/trizen/pipe-viewer
 
@@ -37,7 +37,7 @@ Exec=xhost +SI:localuser:%u
 X-GNOME-Autostart-enabled=true
 ```
 
-### Create the pipe-viewer container:
+### Create the `gtk-pipe-viewer` container:
 
 ```
 podman run -d --name pipe-viewer --security-opt label=disable --userns=keep-id -e DISPLAY=$DISPLAY -e XAUTHORITY=/tmp/.Xauthority -v /tmp/.X11-unix:/tmp/.X11-unix -v $XAUTHORITY:/tmp/.Xauthority:ro -v ~/pipe-viewer-config:/home/pipeuser/.config ghcr.io/danrobi11/pipe-viewer:latest
