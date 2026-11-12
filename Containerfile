@@ -12,10 +12,13 @@ RUN dnf install -y --setopt=install_weak_deps=False \
     gtk3 \
     mpv \
     yt-dlp \
-    deno \
-    wget unzip make gcc \
+    wget unzip make gcc curl \
     libX11 libXext libXcursor libXi libXrandr && \
     dnf clean all
+
+# Install deno (needed by yt-dlp for YouTube)
+RUN curl -fsSL https://deno.land/install.sh | sh && \
+    mv /root/.deno/bin/deno /usr/local/bin/deno
 
 # Create non-root user
 RUN useradd -m -u 1000 pipeuser && \
