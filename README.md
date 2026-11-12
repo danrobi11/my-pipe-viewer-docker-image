@@ -1,4 +1,4 @@
-# Unofficial pipe-viewer docker image
+# Unofficial gtk-pipe-viewer docker image
 
 Credit to: https://github.com/trizen/pipe-viewer
 
@@ -64,4 +64,12 @@ Then, remove the old image:
 
 ```
 podman image prune
+```
+
+### You can still use the CLI, but you have to override the `entrypoint`.
+
+Note: You don’t need the X11 mounts or xhost for the CLI version.
+
+```
+podman run --rm -it --entrypoint pipe-viewer ghcr.io/danrobi11/pipe-viewer:latest
 ```
