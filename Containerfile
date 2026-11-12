@@ -9,6 +9,7 @@ RUN dnf install -y --setopt=install_weak_deps=False \
     perl-Gtk3 \
     perl-Cairo \
     perl-Glib \
+    perl-File-ShareDir \
     gtk3 \
     mpv \
     yt-dlp \
