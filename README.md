@@ -27,6 +27,16 @@ if [ -n "$DISPLAY" ]; then
 fi
 ```
 
+Note: If you use a desktop environment. Put a `xhost-local.desktop` file in `~/.config/autostart/`:
+
+```
+[Desktop Entry]
+Type=Application
+Name=Xhost Local
+Exec=xhost +SI:localuser:%u
+X-GNOME-Autostart-enabled=true
+```
+
 ### Create the pipe-viewer container:
 
 ```
