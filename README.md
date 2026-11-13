@@ -57,7 +57,7 @@ Add this alias in `~/.bash_aliases`.
 Run an update with: `uppipe`
 
 ```
-alias uppipe="podman pull ghcr.io/danrobi11/pipe-viewer:latest && podman stop pipe-viewer && podman rm pipe-viewer && podman run -d --name pipe-viewer --security-opt label=disable --userns=keep-id -e DISPLAY=$DISPLAY -e XAUTHORITY=/tmp/.Xauthority -v /tmp/.X11-unix:/tmp/.X11-unix -v $XAUTHORITY:/tmp/.Xauthority:ro -v ~/pipe-viewer-config:/home/pipeuser/.config ghcr.io/danrobi11/pipe-viewer:latest"
+alias uppipe="podman pull ghcr.io/danrobi11/pipe-viewer:latest && podman rm -fi pipe-viewer && podman run -d --name pipe-viewer --security-opt label=disable --userns=keep-id -e DISPLAY=$DISPLAY -e XAUTHORITY=/tmp/.Xauthority -v /tmp/.X11-unix:/tmp/.X11-unix -v $XAUTHORITY:/tmp/.Xauthority:ro -v ~/pipe-viewer-config:/home/pipeuser/.config ghcr.io/danrobi11/pipe-viewer:latest"
 ```
 
 Then, remove the old image:
