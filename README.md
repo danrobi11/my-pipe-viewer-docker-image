@@ -64,15 +64,7 @@ The run command also mounts your X authority file. That cookie is for your host 
 ### Create the container
 
 ```
-podman run -d --name pipe-viewer \
-  --security-opt label=disable \
-  --userns=keep-id \
-  -e DISPLAY=$DISPLAY \
-  -e XAUTHORITY=/tmp/.Xauthority \
-  -v /tmp/.X11-unix:/tmp/.X11-unix \
-  -v $XAUTHORITY:/tmp/.Xauthority:ro \
-  -v ~/pipe-viewer-config:/home/pipeuser/.config \
-  ghcr.io/danrobi11/pipe-viewer:latest
+podman run -d --name pipe-viewer --security-opt label=disable --userns=keep-id -e DISPLAY="$DISPLAY" -e XAUTHORITY=/tmp/.Xauthority -v /tmp/.X11-unix:/tmp/.X11-unix -v "$XAUTHORITY":/tmp/.Xauthority:ro -v "$HOME/.asoundrc":/etc/asound.conf:ro -v "$HOME/pipe-viewer-config":/home/pipeuser/.config --device /dev/snd ghcr.io/danrobi11/pipe-viewer:latest
 ```
 
 `--security-opt label=disable` lets the container read the config mount on an SELinux host.
@@ -96,7 +88,7 @@ podman stop pipe-viewer
 Add this alias to `~/.bash_aliases`. Update with `uppipe`:
 
 ```
-alias uppipe="podman pull ghcr.io/danrobi11/pipe-viewer:latest && podman rm -f pipe-viewer && podman run -d --name pipe-viewer --security-opt label=disable --userns=keep-id -e DISPLAY=$DISPLAY -e XAUTHORITY=/tmp/.Xauthority -v /tmp/.X11-unix:/tmp/.X11-unix -v $XAUTHORITY:/tmp/.Xauthority:ro -v ~/pipe-viewer-config:/home/pipeuser/.config ghcr.io/danrobi11/pipe-viewer:latest"
+alias uppipe='podman pull ghcr.io/danrobi11/pipe-viewer:latest && podman rm -f pipe-viewer && podman run -d --name pipe-viewer --security-opt label=disable --userns=keep-id -e DISPLAY="$DISPLAY" -e XAUTHORITY=/tmp/.Xauthority -v /tmp/.X11-unix:/tmp/.X11-unix -v "$XAUTHORITY":/tmp/.Xauthority:ro -v "$HOME/.asoundrc":/etc/asound.conf:ro -v "$HOME/pipe-viewer-config":/home/pipeuser/.config --device /dev/snd ghcr.io/danrobi11/pipe-viewer:latest'
 ```
 
 `podman rm -f` replaces `-fi`. The old `-i` stops the alias to ask before removing the container.
